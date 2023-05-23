@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "762861489360",
+    "project_id": "chat-app-bd8a6",
+    "storage_bucket": "chat-app-bd8a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762861489360:android:e0b07604107d203b9fe2d5",
+        "android_client_info": {
+          "package_name": "com.domski.chat_gpt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762861489360-miikj5c58ls3g1tqgquaiddjo7q458r6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB846PUyO9m_DbDPF9meImNKa8Lewr16bQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762861489360-miikj5c58ls3g1tqgquaiddjo7q458r6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "762861489360-ct9ud47vl4uiv8dcsod2spjmn63lak0q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.domski.chatGpt"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
