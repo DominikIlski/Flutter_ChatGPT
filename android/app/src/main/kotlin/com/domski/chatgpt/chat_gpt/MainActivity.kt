@@ -1,4 +1,4 @@
-package com.domski.chatgpt.chat_gpt
+package com.domski.chat_gpt
 
 import io.flutter.embedding.android.FlutterActivity
 
