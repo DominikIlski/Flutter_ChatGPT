@@ -1,4 +1,5 @@
 import 'package:chat_gpt/keys.dart';
+import 'package:chat_gpt/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute:
-          FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/profile',
+          FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/chat',
       routes: {
         '/sign-in': (context) {
           return SignInScreen(
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
               }),
             ],
           );
+        },
+        '/chat' : (context) {
+          return ChatScreen(key: Key('test'));
         },
         '/profile': (context) {
           return ProfileScreen(
