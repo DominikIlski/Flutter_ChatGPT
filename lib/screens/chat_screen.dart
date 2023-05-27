@@ -1,6 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
+
 class ChatScreen extends StatefulWidget {
   const ChatScreen({required Key key}) : super(key: key);
 
@@ -9,7 +10,9 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final List<String> chatMessages = <String>['A', 'B', 'C'];
+  final List<String> chatMessages = <String>[
+    'Hi I am chat gpt, ask me anything!'
+  ];
   final List<int> colorCodes = <int>[600, 500, 400, 300, 100];
   final TextEditingController _textEditingController = TextEditingController();
 
@@ -19,11 +22,15 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
-  Future<String> callOpenAIFunction() async {
+  Future<String> callOpenAIFunction(String prompt) async {
     try {
-      HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sayHello');
-      final HttpsCallableResult result = await callable.call({'test': 'test'});
+      HttpsCallable callable =
+          FirebaseFunctions.instance.httpsCallable('sayHello');
+      final HttpsCallableResult result =
+          await callable.call({'prompt': prompt});
+      print(result);
       print(result.data);
+      print(result.data['data']);
       return result.data['data'];
     } on FirebaseFunctionsException catch (e) {
       print('Firebase function error: ${e.code}\n${e.message}');
@@ -37,9 +44,9 @@ class _ChatScreenState extends State<ChatScreen> {
       chatMessages.add(message);
     });
     _textEditingController.clear();
-    String response = await callOpenAIFunction();
+    String response = await callOpenAIFunction(message);
     setState(() {
-    chatMessages.add(response);
+      chatMessages.add(response);
     });
   }
 
@@ -64,9 +71,17 @@ class _ChatScreenState extends State<ChatScreen> {
               itemCount: chatMessages.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  height: 50,
+                  constraints: BoxConstraints(minHeight: 75),
                   color: Colors.amber[colorCodes[index % colorCodes.length]],
-                  child: Center(child: Text(chatMessages[index])),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Center(
+                      child: Text(
+                        "${chatMessages[index]}\n",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
                 );
               },
               separatorBuilder: (BuildContext context, int index) =>
@@ -83,6 +98,8 @@ class _ChatScreenState extends State<ChatScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
                       controller: _textEditingController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
                     ),
                   ),
                 ),

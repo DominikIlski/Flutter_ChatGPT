@@ -27,11 +27,14 @@ const openai = new OpenAIApi(configuration);
 //   response.send("Hello from Firebase!");
 // });
 export const sayHello = https.onCall(async (data, context) => {
-    logger.info("Hello logs!", {structuredData: true});
-    const response = await openai.listEngines();
-    logger.info(response, {structuredData: true});
+    const completion = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: data.prompt,
+        max_tokens:200
+      });
+    logger.info(completion.data.choices, {structuredData: true});
     
     return {
-        data: 'funkcja odpowiada'
+        data: completion.data.choices.map((e) => e.text).join(' ')
     };
   });
