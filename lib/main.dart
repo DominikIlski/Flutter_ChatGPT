@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           return SignInScreen(
             actions: [
               AuthStateChangeAction<SignedIn>((context, state) {
-                Navigator.pushReplacementNamed(context, '/profile');
+                Navigator.pushNamed(context, '/chat');
               }),
             ],
           );
@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
           return ProfileScreen(
             actions: [
               SignedOutAction((context) {
+                Navigator.popUntil(context, ModalRoute.withName('/sign-in'));
                 Navigator.pushReplacementNamed(context, '/sign-in');
               }),
             ],
