@@ -28,9 +28,6 @@ class _ChatScreenState extends State<ChatScreen> {
           FirebaseFunctions.instance.httpsCallable('sayHello');
       final HttpsCallableResult result =
           await callable.call({'prompt': prompt});
-      print(result);
-      print(result.data);
-      print(result.data['data']);
       return result.data['data'];
     } on FirebaseFunctionsException catch (e) {
       print('Firebase function error: ${e.code}\n${e.message}');
